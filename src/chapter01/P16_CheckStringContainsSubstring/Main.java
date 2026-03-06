@@ -1,4 +1,4 @@
-package chapter01.P14_FindCharacterWithMostAppearances;
+package chapter01.P16_CheckStringContainsSubstring;
 
 import java.util.concurrent.TimeUnit;
 
@@ -10,42 +10,43 @@ public class Main {
             + "or Fermilab. After graduating, I attended Stanford for a degree in economics and "
             + "computer science.";
 
+    private static final String SUBTEXT = "programmer";
+
     public static void main(String[] args) {
 
-        System.out.println("Input text: \n" + TEXT + "\n");
+        System.out.println("Initial text: \n" + TEXT + "\n");
+        System.out.println("Text to search: \n" + SUBTEXT + "\n");
 
-        System.out.println("HashMap based solution:");
+        System.out.println("String.contains() solution:");
         long startTimeV1 = System.nanoTime();
 
-        Pair pairV1 = Strings.maxOccurenceCharacterV1(TEXT);
+        boolean containsV1 = TEXT.contains(SUBTEXT);
 
         displayExecutionTime(System.nanoTime() - startTimeV1);
-        System.out.println("Character: " + pairV1.character);
-        System.out.println("Occurrences :" + pairV1.occurrences);
+        System.out.println("Contained? " + containsV1);
 
         System.out.println();
-        System.out.println("ASCII codes based solution:");
+        System.out.println("Regular expression solution:");
         long startTimeV2 = System.nanoTime();
 
-        Pair pairV2 = Strings.maxOccurenceCharacterV2(TEXT);
+        boolean containsV2 = Strings.containsV1(TEXT, SUBTEXT);
 
         displayExecutionTime(System.nanoTime() - startTimeV2);
-        System.out.println("Character: " + pairV2.character);
-        System.out.println("Occurrences :" + pairV2.occurrences);
-
+        System.out.println("Contained? " + containsV2);
         System.out.println();
-        System.out.println("Java 8, functional-style solution:");
+
+        System.out.println("String.indexOf() solution:");
         long startTimeV3 = System.nanoTime();
 
-        Pair pairV3 = Strings.maxOccurenceCharacterV3(TEXT);
+        boolean containsV3 = Strings.containsV2(TEXT, SUBTEXT);
 
         displayExecutionTime(System.nanoTime() - startTimeV3);
-        System.out.println("Character: " + pairV3.character);
-        System.out.println("Occurrences :" + pairV3.occurrences);
+        System.out.println("Contained? " + containsV3);
     }
 
     private static void displayExecutionTime(long time) {
         System.out.println("Execution time: " + time + " ns" + " ("
                 + TimeUnit.MILLISECONDS.convert(time, TimeUnit.NANOSECONDS) + " ms)");
     }
+
 }
